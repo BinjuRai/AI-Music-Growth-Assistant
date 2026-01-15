@@ -1,0 +1,71 @@
+artist_id,artist_name,genre,location,total_followers,platforms,email
+A0001,Sushma Thapa,Folk,Pokhara,19089,"instagram,youtube",artist1@example.com
+A0002,Shreya Karki Project,Hip-Hop,Pokhara,27938,"instagram,youtube",artist2@example.com
+A0003,Priya Gurung (Band),Pop,Lalitpur,6754,"youtube,spotify",artist3@example.com
+A0004,Nisha Sunar,Folk,Pokhara,15969,"spotify,youtube,instagram",artist4@example.com
+A0005,Muna Thapa Live,Pop,Lalitpur,20676,"youtube,instagram",artist5@example.com
+A0006,Melina Rai Live,Rock,Kathmandu,38346,"instagram,spotify,youtube",artist6@example.com
+A0007,Bimala Rai,Folk,Lalitpur,9014,"youtube,instagram",artist7@example.com
+A0008,Shreya Karki,Hip-Hop,Pokhara,24471,"instagram,youtube",artist8@example.com
+A0009,Samjhana Lamichhane (Band),Rock,Kathmandu,5329,"instagram,youtube",artist9@example.com
+A0010,Sandhya Shrestha Live,Hip-Hop,Lalitpur,2232,"spotify,youtube,instagram",artist10@example.com
+A0011,Shreya Karki Live,Pop,Lalitpur,48246,"instagram,spotify,youtube",artist11@example.com
+A0012,Samjhana Lamichhane Live,Hip-Hop,Kathmandu,11768,"youtube,spotify",artist12@example.com
+A0013,Bimala Rai (Band),Folk,Lalitpur,4741,"youtube,spotify,instagram",artist13@example.com
+A0014,Roshni Khatri Live,Folk,Kathmandu,18353,"youtube,instagram",artist14@example.com
+A0015,Asmita Adhikari,Folk,Lalitpur,12649,"youtube,spotify",artist15@example.com
+A0016,Saroja KC (Band),Folk,Lalitpur,23770,"instagram,spotify,youtube",artist16@example.com
+A0017,Rejina Rimal Official,Folk,Pokhara,9084,"spotify,youtube,instagram",artist17@example.com
+A0018,Keki Adhikari Project,Folk,Pokhara,24915,"spotify,instagram,youtube",artist18@example.com
+A0019,Nisha Sunar (Band),Hip-Hop,Lalitpur,23512,"spotify,youtube,instagram",artist19@example.com
+A0020,Saroja KC Project,Folk,Lalitpur,37141,"spotify,instagram,youtube",artist20@example.com
+A0021,Komal Oli,Rock,Lalitpur,19397,"spotify,youtube",artist21@example.com
+A0022,Pramila Rai,Folk,Pokhara,22557,"instagram,spotify,youtube",artist22@example.com
+A0023,Indira Joshi Project,Hip-Hop,Kathmandu,4908,"spotify,instagram,youtube",artist23@example.com
+A0024,Supriya Sunar Project,Rock,Lalitpur,45531,"instagram,youtube,spotify",artist24@example.com
+A0025,Mamata Gurung,Folk,Kathmandu,22269,"youtube,instagram,spotify",artist25@example.com
+A0026,Bhawana Ghimire Official,Hip-Hop,Lalitpur,29554,"instagram,spotify,youtube",artist26@example.com
+A0027,Ankita Pun,Rock,Pokhara,2026,"youtube,spotify,instagram",artist27@example.com
+A0028,Ankita Pun Project,Folk,Lalitpur,30952,"instagram,spotify,youtube",artist28@example.com
+A0029,Kabita Nepali Live,Folk,Lalitpur,7557,"instagram,youtube,spotify",artist29@example.com
+A0030,Binita Rai Project,Pop,Kathmandu,22343,"spotify,instagram",artist30@example.com
+A0031,Pooja Lama (Band),Hip-Hop,Lalitpur,18046,"instagram,spotify,youtube",artist31@example.com
+A0032,Rejina Rimal,Hip-Hop,Pokhara,39727,"instagram,youtube",artist32@example.com
+A0033,Anju Panta (Band),Pop,Pokhara,17989,"instagram,spotify",artist33@example.com
+A0034,Melina Rai (Band),Pop,Lalitpur,16341,"instagram,youtube",artist34@example.com
+A0035,Sarita Lama,Hip-Hop,Lalitpur,18331,"youtube,spotify",artist35@example.com
+A0036,Pramila Rai Project,Folk,Lalitpur,36808,"youtube,instagram,spotify",artist36@example.com
+A0037,Roshni Khatri Project,Hip-Hop,Lalitpur,33108,"youtube,spotify,instagram",artist37@example.com
+A0038,Rina Thapa Project,Folk,Pokhara,17679,"youtube,spotify,instagram",artist38@example.com
+A0039,Indira Joshi (Band),Folk,Kathmandu,24010,"instagram,spotify,youtube",artist39@example.com
+A0040,Muna Thapa Project,Pop,Pokhara,27102,"instagram,spotify",artist40@example.com
+A0041,Supriya Sunar (Band),Pop,Kathmandu,28712,"instagram,youtube,spotify",artist41@example.com
+A0042,Ankita Pun (Band),Hip-Hop,Kathmandu,29534,"instagram,spotify,youtube",artist42@example.com
+A0043,Rina Thapa Official,Hip-Hop,Kathmandu,25052,"youtube,instagram,spotify",artist43@example.com
+A0044,Sushma Thapa Live,Rock,Lalitpur,19887,"youtube,spotify,instagram",artist44@example.com
+A0045,Priya Gurung Project,Folk,Lalitpur,46508,"instagram,spotify,youtube",artist45@example.com
+A0046,Kabita Nepali,Pop,Lalitpur,37004,"youtube,spotify",artist46@example.com
+A0047,Priya Gurung,Pop,Pokhara,30089,"youtube,spotify",artist47@example.com
+A0048,Mamata Gurung Project,Rock,Pokhara,26844,"spotify,youtube,instagram",artist48@example.com
+A0049,Pooja Lama Project,Pop,Lalitpur,20235,"youtube,spotify,instagram",artist49@example.com
+A0050,Samjhana Lamichhane Official,Pop,Lalitpur,37351,"youtube,spotify",artist50@example.com
+A0051,Pramila Rai Official,Pop,Lalitpur,4638,"spotify,instagram",artist51@example.com
+A0052,Nisha Sunar Project,Pop,Lalitpur,11986,"spotify,youtube",artist52@example.com
+A0053,Bhawana Ghimire Live,Folk,Lalitpur,16284,"instagram,youtube,spotify",artist53@example.com
+A0054,Bimala Rai Live,Pop,Lalitpur,41796,"spotify,youtube",artist54@example.com
+A0055,Sandhya Shrestha Official,Folk,Kathmandu,3682,"instagram,youtube,spotify",artist55@example.com
+A0056,Melina Rai,Pop,Lalitpur,40803,"spotify,youtube",artist56@example.com
+A0057,Mamata Gurung Official,Pop,Lalitpur,4691,"instagram,youtube,spotify",artist57@example.com
+A0058,Supriya Sunar,Pop,Pokhara,44437,"spotify,youtube,instagram",artist58@example.com
+A0059,Supriya Sunar Official,Folk,Lalitpur,25736,"instagram,spotify,youtube",artist59@example.com
+A0060,Sandhya Shrestha Project,Hip-Hop,Lalitpur,36193,"instagram,youtube,spotify",artist60@example.com
+A0061,Muna Thapa,Rock,Pokhara,40828,"youtube,spotify,instagram",artist61@example.com
+A0062,Komal Oli Project,Pop,Pokhara,17981,"instagram,youtube,spotify",artist62@example.com
+A0063,Roshni Khatri,Rock,Pokhara,23300,"youtube,spotify",artist63@example.com
+A0064,Bhawana Ghimire Project,Folk,Kathmandu,24304,"instagram,youtube,spotify",artist64@example.com
+A0065,Sandhya Shrestha (Band),Hip-Hop,Pokhara,17817,"youtube,spotify,instagram",artist65@example.com
+A0066,Sandhya Shrestha,Hip-Hop,Lalitpur,3130,"youtube,spotify",artist66@example.com
+A0067,Sarita Lama Project,Rock,Pokhara,17945,"instagram,youtube,spotify",artist67@example.com
+A0068,Ankita Pun Live,Rock,Pokhara,38070,"youtube,instagram,spotify",artist68@example.com
+A0069,Keki Adhikari Official,Rock,Kathmandu,17108,"instagram,spotify",artist69@example.com
+A0070,Priya Gurung Live,Hip-Hop,Pokhara,37118,"spotify,instagram",artist70@example.com
