@@ -1,8 +1,10 @@
 from bson import ObjectId
 from flask import Blueprint, jsonify
 
-from backend.models.database import MongoConnection
-from backend.models.ml_models import perform_analysis
+# from backend.models.database import MongoConnection
+# from backend.models.ml_models import perform_analysis
+from models.database import MongoConnection
+from models.ml_models import perform_analysis
 
 analytics_bp = Blueprint("analytics", __name__, url_prefix="/api")
 

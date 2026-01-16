@@ -1,8 +1,8 @@
 from bson import ObjectId
 from flask import Blueprint, jsonify
 
-from backend.models.database import MongoConnection
-
+# from backend.models.database import MongoConnection
+from models.database import MongoConnection
 artists_bp = Blueprint("artists", __name__, url_prefix="/api/artists")
 
 
@@ -55,4 +55,3 @@ def get_artist_detail(artist_id: str):
         return jsonify({"error": "Artist not found"}), 404
 
     return jsonify(serialize_artist(artist))
-
