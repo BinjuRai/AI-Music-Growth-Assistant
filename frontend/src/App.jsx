@@ -341,26 +341,319 @@
 
 // export default App;
 
+// import React, { useEffect, useState } from "react";
+// import api from "./api/axios";
+// import ArtistSelector from "./components/ArtistSelector";
+// import SegmentChart from "./components/SegmentChart";
+// import SentimentChart from "./components/SentimentChart";
+// import RecommendationCard from "./components/RecommendationCard";
+// import InsightsPanel from "./components/InsightsPanel";
+// import ArtistOnboarding from './components/ArtistOnboarding';
+// import GrowthDashboard from './components/GrowthDashboard';
+
+// function App() {
+//   const [artists, setArtists] = useState([]);
+//   const [selectedArtist, setSelectedArtist] = useState("");
+//   const [analysis, setAnalysis] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState("");
+//   const [view, setView] = useState('analytics'); // 'analytics' or 'onboarding' or 'growth'
+//   const [currentNewArtist, setCurrentNewArtist] = useState(null);
+
+//   useEffect(() => {
+//     const fetchArtists = async () => {
+//       try {
+//         const res = await api.get("/artists");
+//         setArtists(res.data);
+//       } catch (err) {
+//         console.error(err);
+//         setError(
+//           "Failed to load artists. Please ensure the backend is running."
+//         );
+//       }
+//     };
+//     fetchArtists();
+//   }, []);
+
+//   const handleAnalyze = async () => {
+//     if (!selectedArtist) return;
+//     setLoading(true);
+//     setError("");
+//     try {
+//       const res = await api.post(`/analyze/${selectedArtist}`);
+//       setAnalysis(res.data);
+//     } catch (err) {
+//       console.error(err);
+//       const msg =
+//         err?.response?.data?.error ||
+//         "Analysis failed. Please try again or check the backend.";
+//       setError(msg);
+//       setAnalysis(null);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const segmentPercentagesLabeled = analysis?.segment_percentages
+//     ? {
+//         Superfans:
+//           analysis.segment_percentages["Superfans"] ||
+//           analysis.segment_percentages["superfans"] ||
+//           0,
+//         "Casual Listeners":
+//           analysis.segment_percentages["Casual Listeners"] ||
+//           analysis.segment_percentages["casual"] ||
+//           0,
+//         "One-time Listeners":
+//           analysis.segment_percentages["One-time Listeners"] ||
+//           analysis.segment_percentages["onetime"] ||
+//           0,
+//       }
+//     : {};
+
+//   const clusterStatsRows = analysis?.cluster_statistics
+//     ? Object.entries(analysis.cluster_statistics.engagement_score || {}).map(
+//         ([clusterKey]) => {
+//           const engagement =
+//             analysis.cluster_statistics.engagement_score[clusterKey];
+//           const loyalty = analysis.cluster_statistics.loyalty_score[clusterKey];
+//           const streams = analysis.cluster_statistics.total_streams[clusterKey];
+//           const count = analysis.cluster_statistics.count[clusterKey];
+//           return {
+//             clusterKey,
+//             engagement,
+//             loyalty,
+//             streams,
+//             count,
+//           };
+//         }
+//       )
+//     : [];
+
+//   const bestSegment =
+//     clusterStatsRows.length > 0
+//       ? clusterStatsRows.reduce((best, current) =>
+//           current.engagement > best.engagement ? current : best
+//         )
+//       : null;
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-[#fdfbff] via-[#f8f5ff] to-[#fff0f7] text-gray-800">
+//       {/* Header */}
+//       <header className="relative overflow-hidden">
+//         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/30 via-pink-500/30 to-purple-500/30 blur-3xl" />
+//         <div className="relative max-w-6xl mx-auto px-6 py-14">
+//           <div className="flex justify-between items-center">
+//             <div>
+//               <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+//                 AI Music Growth Assistant
+//               </h1>
+//               <p className="mt-3 max-w-2xl text-sm md:text-base text-gray-600">
+//                 Empowering emerging female artists with ethical, data-driven growth
+//                 insights.
+//               </p>
+//               <p className="mt-1 text-xs text-gray-500">Kathmandu Valley, Nepal</p>
+//             </div>
+
+//             {/* Navigation Buttons */}
+//             <div className="flex gap-3">
+//               <button
+//                 onClick={() => setView('analytics')}
+//                 className={`px-4 py-2 rounded-lg font-semibold transition ${
+//                   view === 'analytics'
+//                     ? 'bg-indigo-600 text-white'
+//                     : 'bg-white/70 text-gray-700 hover:bg-white'
+//                 }`}
+//               >
+//                 Analytics
+//               </button>
+//               <button
+//                 onClick={() => setView('onboarding')}
+//                 className={`px-4 py-2 rounded-lg font-semibold transition ${
+//                   view === 'onboarding'
+//                     ? 'bg-green-600 text-white'
+//                     : 'bg-white/70 text-gray-700 hover:bg-white'
+//                 }`}
+//               >
+//                 + New Artist
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Main Content */}
+//       <main className="max-w-6xl mx-auto px-6 pb-16 space-y-8">
+
+//         {/* ANALYTICS VIEW */}
+//         {view === 'analytics' && (
+//           <>
+//             {/* Artist Selector */}
+//             <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-white">
+//               <ArtistSelector
+//                 artists={artists}
+//                 selectedArtist={selectedArtist}
+//                 onChange={setSelectedArtist}
+//                 onAnalyze={handleAnalyze}
+//                 loading={loading}
+//               />
+//             </div>
+
+//             {/* Error */}
+//             {error && (
+//               <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700 shadow-sm">
+//                 {error}
+//               </div>
+//             )}
+
+//             {/* Analysis Section */}
+//             {analysis && (
+//               <div className="space-y-8">
+//                 {/* Charts */}
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
+//                     <SegmentChart
+//                       listenerSegments={analysis.listener_segments}
+//                       segmentPercentages={segmentPercentagesLabeled}
+//                     />
+//                   </div>
+
+//                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
+//                     <SentimentChart
+//                       sentimentAnalysis={analysis.sentiment_analysis}
+//                     />
+//                   </div>
+//                 </div>
+
+//                 {/* Segment Metrics */}
+//                 <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
+//                   <h3 className="text-lg font-semibold mb-4 text-gray-800">
+//                     Listener Segment Performance
+//                   </h3>
+//                   <div className="overflow-x-auto">
+//                     <table className="min-w-full text-sm">
+//                       <thead>
+//                         <tr className="border-b text-gray-500">
+//                           <th className="py-3 px-2 text-left">Cluster</th>
+//                           <th className="py-3 px-2 text-left">Avg Streams</th>
+//                           <th className="py-3 px-2 text-left">Engagement</th>
+//                           <th className="py-3 px-2 text-left">Loyalty</th>
+//                           <th className="py-3 px-2 text-left">Listeners</th>
+//                         </tr>
+//                       </thead>
+//                       <tbody>
+//                         {clusterStatsRows.map((row) => {
+//                           const isBest =
+//                             bestSegment &&
+//                             row.clusterKey === bestSegment.clusterKey;
+
+//                           return (
+//                             <tr
+//                               key={row.clusterKey}
+//                               className={`border-b last:border-0 transition ${
+//                                 isBest
+//                                   ? "bg-gradient-to-r from-green-50 to-emerald-50"
+//                                   : "hover:bg-gray-50"
+//                               }`}
+//                             >
+//                               <td className="py-3 px-2 font-medium">
+//                                 Cluster {row.clusterKey}
+//                                 {isBest && (
+//                                   <span className="ml-2 inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">
+//                                     Top Performing
+//                                   </span>
+//                                 )}
+//                               </td>
+//                               <td className="py-3 px-2">{row.streams}</td>
+//                               <td className="py-3 px-2">{row.engagement}</td>
+//                               <td className="py-3 px-2">{row.loyalty}</td>
+//                               <td className="py-3 px-2">{row.count}</td>
+//                             </tr>
+//                           );
+//                         })}
+//                       </tbody>
+//                     </table>
+//                   </div>
+//                 </div>
+
+//                 {/* Recommendations & Insights */}
+//                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+//                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
+//                     <RecommendationCard
+//                       recommendations={analysis.recommendations}
+//                     />
+//                   </div>
+
+//                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
+//                     <InsightsPanel
+//                       insights={analysis.key_insights}
+//                       silhouetteScore={analysis.silhouette_score}
+//                     />
+//                   </div>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Empty State */}
+//             {!analysis && !loading && (
+//               <div className="rounded-2xl bg-white/70 backdrop-blur shadow-md p-6 border border-white text-center text-sm text-gray-600">
+//                 🎵 Select an artist and run the analysis to explore listener
+//                 segments, emotional sentiment, and AI-powered growth strategies
+//                 crafted for emerging female musicians.
+//               </div>
+//             )}
+//           </>
+//         )}
+
+//         {/* ONBOARDING VIEW */}
+//         {view === 'onboarding' && (
+//           <ArtistOnboarding
+//             onComplete={(data) => {
+//               setCurrentNewArtist(data);
+//               setView('growth');
+//             }}
+//           />
+//         )}
+
+//         {/* GROWTH DASHBOARD VIEW */}
+//         {view === 'growth' && currentNewArtist && (
+//           <GrowthDashboard artistId={currentNewArtist.artist_id} />
+//         )}
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default App;
 
 import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import api from "./api/axios";
 import ArtistSelector from "./components/ArtistSelector";
 import SegmentChart from "./components/SegmentChart";
 import SentimentChart from "./components/SentimentChart";
 import RecommendationCard from "./components/RecommendationCard";
 import InsightsPanel from "./components/InsightsPanel";
-import ArtistOnboarding from './components/ArtistOnboarding';
-import GrowthDashboard from './components/GrowthDashboard';
+import ArtistOnboarding from "./components/ArtistOnboarding";
+import NewArtistsList from "./components/Aritst/NewArtistsList";
+import ArtistProfile from "./components/Aritst/ArtistProfile";
+import { useToast } from "./hooks/useToast";
+import Toast from "./components/common/Toast";
 
-function App() {
+function MainDashboard() {
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState("");
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [view, setView] = useState('analytics'); // 'analytics' or 'onboarding' or 'growth'
-  const [currentNewArtist, setCurrentNewArtist] = useState(null);
-
+  const [view, setView] = useState("analytics"); // 'analytics' or 'onboarding' or 'new-artists'
+  const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
   useEffect(() => {
     const fetchArtists = async () => {
       try {
@@ -369,7 +662,7 @@ function App() {
       } catch (err) {
         console.error(err);
         setError(
-          "Failed to load artists. Please ensure the backend is running."
+          "Failed to load artists. Please ensure the backend is running.",
         );
       }
     };
@@ -420,26 +713,39 @@ function App() {
           const loyalty = analysis.cluster_statistics.loyalty_score[clusterKey];
           const streams = analysis.cluster_statistics.total_streams[clusterKey];
           const count = analysis.cluster_statistics.count[clusterKey];
-          return {
-            clusterKey,
-            engagement,
-            loyalty,
-            streams,
-            count,
-          };
-        }
+          return { clusterKey, engagement, loyalty, streams, count };
+        },
       )
     : [];
 
   const bestSegment =
     clusterStatsRows.length > 0
       ? clusterStatsRows.reduce((best, current) =>
-          current.engagement > best.engagement ? current : best
+          current.engagement > best.engagement ? current : best,
         )
       : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#fdfbff] via-[#f8f5ff] to-[#fff0f7] text-gray-800">
+      <div className="fixed top-4 right-4 z-50 space-y-2">
+        {toasts.map((toast) => (
+          <Toast
+            key={toast.id}
+            message={toast.message}
+            type={toast.type}
+            onClose={() => removeToast(toast.id)}
+          />
+        ))}
+      </div>
+
+      {view === "onboarding" && (
+        <ArtistOnboarding
+          onComplete={(data) => {
+            navigate(`/artist-profile/${data.artist_id}`);
+          }}
+          showToast={showToast}
+        />
+      )}
       {/* Header */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/30 via-pink-500/30 to-purple-500/30 blur-3xl" />
@@ -450,33 +756,45 @@ function App() {
                 AI Music Growth Assistant
               </h1>
               <p className="mt-3 max-w-2xl text-sm md:text-base text-gray-600">
-                Empowering emerging female artists with ethical, data-driven growth
-                insights.
+                Empowering emerging female artists with ethical, data-driven
+                growth insights.
               </p>
-              <p className="mt-1 text-xs text-gray-500">Kathmandu Valley, Nepal</p>
+              <p className="mt-1 text-xs text-gray-500">
+                Kathmandu Valley, Nepal
+              </p>
             </div>
-            
+
             {/* Navigation Buttons */}
             <div className="flex gap-3">
-              <button 
-                onClick={() => setView('analytics')}
+              <button
+                onClick={() => setView("analytics")}
                 className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  view === 'analytics' 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-white/70 text-gray-700 hover:bg-white'
+                  view === "analytics"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-white/70 text-gray-700 hover:bg-white"
                 }`}
               >
-                Analytics
+                📊 Analytics
               </button>
-              <button 
-                onClick={() => setView('onboarding')}
+              <button
+                onClick={() => setView("new-artists")}
                 className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  view === 'onboarding' 
-                    ? 'bg-green-600 text-white' 
-                    : 'bg-white/70 text-gray-700 hover:bg-white'
+                  view === "new-artists"
+                    ? "bg-purple-600 text-white"
+                    : "bg-white/70 text-gray-700 hover:bg-white"
                 }`}
               >
-                + New Artist
+                🎤 New Artists
+              </button>
+              <button
+                onClick={() => setView("onboarding")}
+                className={`px-4 py-2 rounded-lg font-semibold transition ${
+                  view === "onboarding"
+                    ? "bg-green-600 text-white"
+                    : "bg-white/70 text-gray-700 hover:bg-white"
+                }`}
+              >
+                + Add New Artist
               </button>
             </div>
           </div>
@@ -485,11 +803,9 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-6 pb-16 space-y-8">
-        
         {/* ANALYTICS VIEW */}
-        {view === 'analytics' && (
+        {view === "analytics" && (
           <>
-            {/* Artist Selector */}
             <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-white">
               <ArtistSelector
                 artists={artists}
@@ -500,17 +816,14 @@ function App() {
               />
             </div>
 
-            {/* Error */}
             {error && (
               <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700 shadow-sm">
                 {error}
               </div>
             )}
 
-            {/* Analysis Section */}
             {analysis && (
               <div className="space-y-8">
-                {/* Charts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
                     <SegmentChart
@@ -518,7 +831,6 @@ function App() {
                       segmentPercentages={segmentPercentagesLabeled}
                     />
                   </div>
-
                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
                     <SentimentChart
                       sentimentAnalysis={analysis.sentiment_analysis}
@@ -526,7 +838,6 @@ function App() {
                   </div>
                 </div>
 
-                {/* Segment Metrics */}
                 <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
                   <h3 className="text-lg font-semibold mb-4 text-gray-800">
                     Listener Segment Performance
@@ -547,15 +858,10 @@ function App() {
                           const isBest =
                             bestSegment &&
                             row.clusterKey === bestSegment.clusterKey;
-
                           return (
                             <tr
                               key={row.clusterKey}
-                              className={`border-b last:border-0 transition ${
-                                isBest
-                                  ? "bg-gradient-to-r from-green-50 to-emerald-50"
-                                  : "hover:bg-gray-50"
-                              }`}
+                              className={`border-b last:border-0 transition ${isBest ? "bg-gradient-to-r from-green-50 to-emerald-50" : "hover:bg-gray-50"}`}
                             >
                               <td className="py-3 px-2 font-medium">
                                 Cluster {row.clusterKey}
@@ -577,14 +883,12 @@ function App() {
                   </div>
                 </div>
 
-                {/* Recommendations & Insights */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
                     <RecommendationCard
                       recommendations={analysis.recommendations}
                     />
                   </div>
-
                   <div className="bg-white/80 backdrop-blur rounded-2xl shadow-md p-6 border border-white">
                     <InsightsPanel
                       insights={analysis.key_insights}
@@ -595,7 +899,6 @@ function App() {
               </div>
             )}
 
-            {/* Empty State */}
             {!analysis && !loading && (
               <div className="rounded-2xl bg-white/70 backdrop-blur shadow-md p-6 border border-white text-center text-sm text-gray-600">
                 🎵 Select an artist and run the analysis to explore listener
@@ -606,22 +909,30 @@ function App() {
           </>
         )}
 
+        {/* NEW ARTISTS LIST VIEW */}
+        {view === "new-artists" && <NewArtistsList />}
+
         {/* ONBOARDING VIEW */}
-        {view === 'onboarding' && (
-          <ArtistOnboarding 
+        {view === "onboarding" && (
+          <ArtistOnboarding
             onComplete={(data) => {
-              setCurrentNewArtist(data);
-              setView('growth');
+              navigate(`/artist-profile/${data.artist_id}`);
             }}
           />
         )}
-
-        {/* GROWTH DASHBOARD VIEW */}
-        {view === 'growth' && currentNewArtist && (
-          <GrowthDashboard artistId={currentNewArtist.artist_id} />
-        )}
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainDashboard />} />
+        <Route path="/artist-profile/:artistId" element={<ArtistProfile />} />
+      </Routes>
+    </Router>
   );
 }
 

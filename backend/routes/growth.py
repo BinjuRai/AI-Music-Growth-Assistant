@@ -387,5 +387,20 @@ def get_artist_timeline(artist_id: str):
     
     return jsonify({'events': events})
 
-
+@growth_bp.get("/new-artists")
+def get_new_artists_list():
+    """Get list of all new artists"""
+    db = MongoConnection.get_db()
+    
+    artists = list(db.new_artists.find().sort('onboarding_date', -1))
+    
+    # Serialize
+    result = []
+    for artist in artists:
+        artist['_id'] = str(artist['_id'])
+        if artist.get('mentor_match'):
+            artist['mentor_match'] = str(artist['mentor_match'])
+        result.append(artist)
+    
+    return jsonify(result)
 
