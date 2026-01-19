@@ -235,7 +235,7 @@ from config import config
 from routes.analytics import analytics_bp      # <- ADD THIS
 from routes.artists import artists_bp          # <- ADD THIS
 from routes.growth import growth_bp            # <- ADD THIS
-
+from routes.advanced.advanced_analytics import advanced_bp, init_advanced_models
 
 def create_app() -> Flask:
     app = Flask(__name__)
@@ -246,15 +246,21 @@ def create_app() -> Flask:
     app.register_blueprint(artists_bp)
     app.register_blueprint(analytics_bp)
     app.register_blueprint(growth_bp)
+    app.register_blueprint(advanced_bp)
 
     @app.get("/api/health")
     def health():
         return jsonify({"status": "ok"})
+    
+
+    print("🚀 Initializing advanced analytics models...")
+    init_advanced_models()
 
     return app
-
+    
 
 if __name__ == "__main__":
     app = create_app()
+    
     print("🚀 Starting Flask server on http://localhost:5001")
     app.run(host="0.0.0.0", port=5001, debug=True)
