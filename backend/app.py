@@ -236,7 +236,7 @@ from routes.analytics import analytics_bp      # <- ADD THIS
 from routes.artists import artists_bp          # <- ADD THIS
 from routes.growth import growth_bp            # <- ADD THIS
 from routes.advanced.advanced_analytics import advanced_bp, init_advanced_models
-
+from routes.new_artist_analytics import new_artist_advanced_bp, init_new_artist_models
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config["JSON_SORT_KEYS"] = False
@@ -247,6 +247,7 @@ def create_app() -> Flask:
     app.register_blueprint(analytics_bp)
     app.register_blueprint(growth_bp)
     app.register_blueprint(advanced_bp)
+    app.register_blueprint(new_artist_advanced_bp)
 
     @app.get("/api/health")
     def health():
@@ -255,6 +256,7 @@ def create_app() -> Flask:
 
     print("🚀 Initializing advanced analytics models...")
     init_advanced_models()
+    init_new_artist_models()
 
     return app
     
